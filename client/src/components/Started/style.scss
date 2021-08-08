@@ -1,0 +1,15 @@
+.started {
+  text-align: center;
+  &__box-icon {
+    font-size: 75px;
+    display: block;
+    color: #ddd;
+    margin-bottom: 30px;
+  }
+  &__text {
+    margin-bottom: 30px;
+  }
+  &__button {
+    width: 100%;
+  }
+}
