@@ -23,7 +23,7 @@ router.post(
                 return res.status(400).json({errors: errors.array(), message: 'Invalid data on registration'})
             }
 
-            const {email, password, lastName, firstName} = req.body;
+            const {email, password, lastName, firstName, phone} = req.body;
 
             const candidate = await User.findOne({email})
 
@@ -32,7 +32,7 @@ router.post(
             }
 
             const hashedPassword = await bcrypt.hash(password, 12);
-            const user = new User({email, password: hashedPassword, lastName, firstName});
+            const user = new User({email, password: hashedPassword, lastName, firstName, phone});
 
             await user.save();
 

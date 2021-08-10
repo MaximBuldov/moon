@@ -12,6 +12,7 @@ const username = encodeURIComponent(config.get('login'));
 const password = encodeURIComponent(config.get('password'));
 
 app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/order', require('./routes/order.routes'));
 
 
 async function start() {

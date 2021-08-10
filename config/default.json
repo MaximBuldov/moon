@@ -3,5 +3,6 @@
   "jwtSecret" : "secret string for moon site",
   "login": "moonadmin",
   "password": "Bx#}#WHi?A",
-  "mongoUri": "mongodb+srv://moonadmin:Bx#}#WHi?A@cluster0.dwloq.mongodb.net/moon?retryWrites=true&w=majority"
+  "mongoUri": "mongodb+srv://moonadmin:Bx#}#WHi?A@cluster0.dwloq.mongodb.net/moon?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000"
 }
