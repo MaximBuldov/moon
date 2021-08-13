@@ -5,10 +5,8 @@ const router = Router()
 
 router.post('/create', auth, async (req, res) => {
     try {
-        //const baseUrl = config.get('baseUrl')
-        const {details, total} = req.body
-        const order = new Order({details, total})
-        console.log(order);
+        const {details, total, info} = req.body
+        const order = new Order({details, total, info})
         await order.save().catch(err => console.log(err));
         res.status(201).json({order})
 

@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Drawer, Layout, Menu} from "antd";
-import {Link} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import './style.scss';
 import {VscMenu} from "react-icons/all";
+import {AuthContext} from "../../context/AuthContext";
 
 
 
 const Header = () => {
+    const history = useHistory();
     const [visible, setVisible] = useState(false);
     const [currentMenu, setCurrentMenu] = useState('1');
     const showDrawer = () => {
@@ -15,6 +17,13 @@ const Header = () => {
     const handleClick = e => {
         setCurrentMenu(e.key)
     };
+
+    const auth = useContext(AuthContext);
+
+    const logoutHandler = () => {
+        auth.logout();
+        history.push('/login');
+    }
     return (
         <>
             <Layout.Header className="header">
@@ -26,22 +35,32 @@ const Header = () => {
                     defaultSelectedKeys={[currentMenu]}
                     style={{justifyContent: "flex-end"}}
                 >
-                    <Menu.Item key="1">
-                        <Link to="/">Home</Link>
-                    </Menu.Item>
-                    <Menu.Item key="2">
-                        <Link to="/login">Log In</Link>
-                    </Menu.Item>
-                    <Menu.Item key="3">
-                        <Link to="/signup">Sign Up</Link>
-                    </Menu.Item>
-                    <Menu.Item onClick={showDrawer} key="4">
-                        <VscMenu />
-                    </Menu.Item>
+                    {auth.isAuth ? (
+                        <>
+                            <Menu.Item key="home">
+                                <NavLink to="/">Home</NavLink>
+                            </Menu.Item>
+                            <Menu.Item onClick={logoutHandler} key="logout">
+                            Log out
+                            </Menu.Item>
+                            <Menu.Item onClick={showDrawer} key="drawer">
+                                <VscMenu />
+                            </Menu.Item>
+                        </>
+                    ) : (
+                        <>
+                            <Menu.Item key="login">
+                                <NavLink to="/login">Log In</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="signup">
+                                <NavLink to="/signup">Sign Up</NavLink>
+                            </Menu.Item>
+                        </>
+                        )}
                 </Menu>
             </Layout.Header>
             <Drawer
-                title="Basic Drawer"
+                title="Maxim"
                 placement="right"
                 closable={false}
                 onClose={showDrawer}
@@ -53,9 +72,10 @@ const Header = () => {
                     defaultOpenKeys={['sub1']}
                     style={{ height: '100%', borderLeft: 0 }}
                 >
-                    <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
-                    <Menu.Item key="3">nav 3</Menu.Item>
+                    <Menu.Item key="1">Payment</Menu.Item>
+                    <Menu.Item key="2">Past order</Menu.Item>
+                    <Menu.Item key="3">FAQ</Menu.Item>
+                    <Menu.Item key="4">Contact us</Menu.Item>
                 </Menu>
             </Drawer>
         </>

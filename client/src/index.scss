@@ -20,3 +20,9 @@
   align-items: center;
   justify-content: center;
 }
+h1.ant-typography {
+  text-align: center;
+}
+main.ant-layout-content.site-layout-background.container > div {
+  width: 500px;
+}
